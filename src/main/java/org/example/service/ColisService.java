@@ -7,18 +7,20 @@ import org.example.repository.LivreurRepository;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 public class ColisService {
 
     private ColisRepository colisRepository;
     private LivreurRepository livreurRepository;
 
+    // 🔹 Constructeur pour injection XML
     public ColisService(ColisRepository colisRepository, LivreurRepository livreurRepository) {
         this.colisRepository = colisRepository;
         this.livreurRepository = livreurRepository;
     }
 
-    public Colis createColis(Colis colis, Long livreurId) {
+    public Colis createColis(Colis colis, UUID livreurId) {
         Livreur livreur = livreurRepository.findById(livreurId)
                 .orElseThrow(() -> new RuntimeException("Livreur non trouvé"));
         colis.setLivreur(livreur);
@@ -29,24 +31,24 @@ public class ColisService {
         return colisRepository.findAll();
     }
 
-    public Optional<Colis> getColisById(Long id) {
+    public Optional<Colis> getColisById(UUID id) {
         return colisRepository.findById(id);
     }
 
-    public Colis updateStatut(Long id, String nouveauStatut) {
+    public Colis updateStatut(UUID id, String nouveauStatut) {
         Colis colis = colisRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Colis non trouvé"));
         colis.setStatut(nouveauStatut);
         return colisRepository.save(colis);
     }
 
-    public List<Colis> getColisByLivreur(Long livreurId) {
+    public List<Colis> getColisByLivreur(UUID livreurId) {
         Livreur livreur = livreurRepository.findById(livreurId)
                 .orElseThrow(() -> new RuntimeException("Livreur non trouvé"));
         return livreur.getColis();
     }
 
-    public Colis updateColis(Long id, Colis updatedColis) {
+    public Colis updateColis(UUID id, Colis updatedColis) {
         return colisRepository.findById(id)
                 .map(colis -> {
                     colis.setDestinataire(updatedColis.getDestinataire());
@@ -58,7 +60,7 @@ public class ColisService {
                 .orElseThrow(() -> new RuntimeException("Colis non trouvé"));
     }
 
-    public void deleteColis(Long id) {
+    public void deleteColis(UUID id) {
         if (!colisRepository.existsById(id)) {
             throw new RuntimeException("Colis non trouvé");
         }

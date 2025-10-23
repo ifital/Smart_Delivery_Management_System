@@ -2,12 +2,15 @@ package org.example.model;
 
 import jakarta.persistence.*;
 
+import java.util.UUID;
+
 @Entity
 @Table(name = "colis")
 public class Colis {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(columnDefinition = "UUID")
+    private UUID id;
     private String destinataire;
     private String adresse;
     private double poids;
@@ -17,11 +20,11 @@ public class Colis {
     @JoinColumn(name = "livreur_id")
     private Livreur livreur;
 
-    public Long getId() {
+    public UUID getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(UUID id) {
         this.id = id;
     }
 

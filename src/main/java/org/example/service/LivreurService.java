@@ -5,6 +5,7 @@ import org.example.repository.LivreurRepository;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 public class LivreurService {
 
@@ -22,11 +23,11 @@ public class LivreurService {
         return livreurRepository.findAll();
     }
 
-    public Optional<Livreur> getLivreurById(Long id) {
+    public Optional<Livreur> getLivreurById(UUID id) {
         return livreurRepository.findById(id);
     }
 
-    public Livreur updateLivreur(Long id, Livreur updatedLivreur) {
+    public Livreur updateLivreur(UUID id, Livreur updatedLivreur) {
         return livreurRepository.findById(id)
                 .map(livreur -> {
                     livreur.setNom(updatedLivreur.getNom());
@@ -38,7 +39,7 @@ public class LivreurService {
                 .orElseThrow(() -> new RuntimeException("Livreur non trouvé"));
     }
 
-    public void deleteLivreur(Long id) {
+    public void deleteLivreur(UUID id) {
         if (!livreurRepository.existsById(id)) {
             throw new RuntimeException("Livreur non trouvé");
         }
