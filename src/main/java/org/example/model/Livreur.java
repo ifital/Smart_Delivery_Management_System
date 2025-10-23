@@ -17,7 +17,7 @@ public class Livreur {
     private String vehicule;
     private String telephone;
 
-    @OneToMany(mappedBy = "livreur")
+    @OneToMany(mappedBy = "livreur", fetch = FetchType.EAGER)
     private List<Colis> colis;
 
 
