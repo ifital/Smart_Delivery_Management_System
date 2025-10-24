@@ -9,11 +9,13 @@ import java.util.UUID;
 
 public class LivreurService {
 
-    private LivreurRepository livreurRepository;
+    private final LivreurRepository livreurRepository;
 
     public LivreurService(LivreurRepository livreurRepository) {
         this.livreurRepository = livreurRepository;
     }
+
+
 
     public Livreur createLivreur(Livreur livreur) {
         return livreurRepository.save(livreur);

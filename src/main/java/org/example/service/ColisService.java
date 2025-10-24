@@ -11,8 +11,8 @@ import java.util.UUID;
 
 public class ColisService {
 
-    private ColisRepository colisRepository;
-    private LivreurRepository livreurRepository;
+    private final ColisRepository colisRepository;
+    private final LivreurRepository livreurRepository;
 
     // 🔹 Constructeur pour injection XML
     public ColisService(ColisRepository colisRepository, LivreurRepository livreurRepository) {

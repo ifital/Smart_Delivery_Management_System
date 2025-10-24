@@ -1,5 +1,6 @@
 package org.example.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.util.List;
@@ -18,6 +19,7 @@ public class Livreur {
     private String telephone;
 
     @OneToMany(mappedBy = "livreur", fetch = FetchType.EAGER)
+    @JsonIgnore
     private List<Colis> colis;
 
 
