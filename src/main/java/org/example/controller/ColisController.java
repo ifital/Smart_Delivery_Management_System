@@ -2,10 +2,10 @@ package org.example.controller;
 
 import org.example.model.Colis;
 import org.example.service.ColisService;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.UUID;
 
 @RestController
@@ -30,8 +30,10 @@ public class ColisController {
     }
 
     @GetMapping("/{id}")
-    public Optional<Colis> getColisById(@PathVariable("id") UUID id) {
-        return colisService.getColisById(id);
+    public ResponseEntity<Colis> getColisById(@PathVariable("id") UUID id) {
+        return colisService.getColisById(id)
+                .map(ResponseEntity::ok)
+                .orElse(ResponseEntity.notFound().build());
     }
 
     @PutMapping("/statut/{id}")
