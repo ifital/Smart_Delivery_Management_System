@@ -30,17 +30,19 @@ public class LivreurController {
     }
 
     @GetMapping("/{id}")
-    public Optional<Livreur> getLivreurById(@PathVariable UUID id) {
-        return livreurService.getLivreurById(id);
+    public Livreur getLivreurById(@PathVariable("id") UUID id) {
+        return livreurService.getLivreurById(id)
+                .orElseThrow(() -> new RuntimeException("Livreur non trouvé"));
     }
 
+
     @PutMapping("/{id}")
-    public Livreur updateLivreur(@PathVariable UUID id, @RequestBody Livreur updatedLivreur) {
+    public Livreur updateLivreur(@PathVariable("id") UUID id, @RequestBody Livreur updatedLivreur) {
         return livreurService.updateLivreur(id, updatedLivreur);
     }
 
     @DeleteMapping("/{id}")
-    public void deleteLivreur(@PathVariable UUID id) {
+    public void deleteLivreur(@PathVariable("id") UUID id) {
         livreurService.deleteLivreur(id);
     }
 }

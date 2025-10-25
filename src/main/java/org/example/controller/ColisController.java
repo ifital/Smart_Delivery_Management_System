@@ -20,7 +20,7 @@ public class ColisController {
     }
 
     @PostMapping("/{livreurId}")
-    public Colis createColis(@RequestBody Colis colis, @PathVariable UUID livreurId) {
+    public Colis createColis(@RequestBody Colis colis, @PathVariable("livreurId") UUID livreurId) {
         return colisService.createColis(colis, livreurId);
     }
 
@@ -30,27 +30,27 @@ public class ColisController {
     }
 
     @GetMapping("/{id}")
-    public Optional<Colis> getColisById(@PathVariable UUID id) {
+    public Optional<Colis> getColisById(@PathVariable("id") UUID id) {
         return colisService.getColisById(id);
     }
 
     @PutMapping("/statut/{id}")
-    public Colis updateStatut(@PathVariable UUID id, @RequestParam String statut) {
+    public Colis updateStatut(@PathVariable("id") UUID id, @RequestParam String statut) {
         return colisService.updateStatut(id, statut);
     }
 
     @PutMapping("/{id}")
-    public Colis updateColis(@PathVariable UUID id, @RequestBody Colis updatedColis) {
+    public Colis updateColis(@PathVariable("id") UUID id, @RequestBody Colis updatedColis) {
         return colisService.updateColis(id, updatedColis);
     }
 
     @GetMapping("/livreur/{livreurId}")
-    public List<Colis> getColisByLivreur(@PathVariable UUID livreurId) {
+    public List<Colis> getColisByLivreur(@PathVariable("livreurId") UUID livreurId) {
         return colisService.getColisByLivreur(livreurId);
     }
 
     @DeleteMapping("/{id}")
-    public void deleteColis(@PathVariable UUID id) {
+    public void deleteColis(@PathVariable("id") UUID id) {
         colisService.deleteColis(id);
     }
 }
